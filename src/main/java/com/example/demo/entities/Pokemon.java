@@ -1,5 +1,6 @@
 package com.example.demo.entities;
 
+import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -7,6 +8,7 @@ import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "pokemon")
@@ -24,16 +26,20 @@ public class Pokemon {
     private int generacion;
     private String uuid;
 
+    @Column(name = "fecha_descubrimiento")
+    private LocalDate fechaDescubrimiento;
+
     public Pokemon() {
     }
 
-    public Pokemon(int id, String nombre, String descripcion, TipoPokemon tipo, int generacion, String uuid) {
+    public Pokemon(int id, String nombre, String descripcion, TipoPokemon tipo, int generacion, String uuid, LocalDate fechaDescubrimiento) {
         this.id = id;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.tipo = tipo;
         this.generacion = generacion;
         this.uuid = uuid;
+        this.fechaDescubrimiento = fechaDescubrimiento;
     }
 
     public int getId() {
@@ -82,5 +88,13 @@ public class Pokemon {
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
+    }
+
+    public LocalDate getFechaDescubrimiento() {
+        return fechaDescubrimiento;
+    }
+
+    public void setFechaDescubrimiento(LocalDate fechaDescubrimiento) {
+        this.fechaDescubrimiento = fechaDescubrimiento;
     }
 }
