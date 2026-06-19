@@ -9,6 +9,7 @@ import com.example.demo.repositories.CapturaRepository;
 import com.example.demo.repositories.EntrenadorRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -60,7 +61,7 @@ public class EntrenadorController {
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Lista de pokemones obtenida con éxito",
                     content = @Content(mediaType = "application/json",
-                    schema = @Schema(implementation = Pokemon.class))),
+                    array = @ArraySchema(schema = @Schema(implementation = Pokemon.class)))),
             @ApiResponse(responseCode = "404", description = "Entrenador no encontrado",
                     content = @Content)
     })
@@ -68,11 +69,7 @@ public class EntrenadorController {
             @Parameter(description = "UUID del Entrenador", example = "f3262.....")
             @PathVariable("uuid") String uuid) {
         
-        // Primero verificamos si el entrenador existe por su UUID
-        boolean entrenadorExists = entrenadorRepository.findAll().stream()
-                .anyMatch(e -> uuid.equals(e.getUuid()));
-        
-        if (!entrenadorExists) {
+        if (entrenadorRepository.findByUuid(uuid).isEmpty()) {
             return ResponseEntity.notFound().build();
         }
 
