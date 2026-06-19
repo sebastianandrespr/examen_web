@@ -30,11 +30,12 @@ public class Entrenador {
     private Pueblo pueblo;
 
     private String uuid;
+    private String email;
 
     public Entrenador() {
     }
 
-    public Entrenador(int id, String nombre, String apellido, LocalDate fechaNacimiento, LocalDate fechaVinculacion, Pueblo pueblo, String uuid) {
+    public Entrenador(int id, String nombre, String apellido, LocalDate fechaNacimiento, LocalDate fechaVinculacion, Pueblo pueblo, String uuid, String email) {
         this.id = id;
         this.nombre = nombre;
         this.apellido = apellido;
@@ -42,6 +43,7 @@ public class Entrenador {
         this.fechaVinculacion = fechaVinculacion;
         this.pueblo = pueblo;
         this.uuid = uuid;
+        this.email = email;
     }
 
     public int getId() {
@@ -98,5 +100,13 @@ public class Entrenador {
 
     public void setUuid(String uuid) {
         this.uuid = uuid;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public void setEmail(String email) {
+        this.email = email;
     }
 }
